@@ -38,7 +38,7 @@ class CarInsurance {
           if (product.sellIn < 0) {
             product.price -= 2;
           } else {
-            product -= 1;
+            product.price -= 1;
           }
       }
     })
