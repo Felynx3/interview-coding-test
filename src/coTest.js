@@ -10,52 +10,38 @@ class CarInsurance {
   constructor(products = []) {
     this.products = products;
   }
+
   updatePrice() {
-    for (var i = 0; i < this.products.length; i++) {
-      if (this.products[i].name != 'Full Coverage' && this.products[i].name != 'Special Full Coverage') {
-        if (this.products[i].price > 0) {
-          if (this.products[i].name != 'Mega Coverage') {
-            this.products[i].price = this.products[i].price - 1;
+    this.products.forEach((product) => {
+      product.sellIn -= 1;
+
+      switch (product.name) {
+        case 'Full Coverage':
+          product.price += 1;
+
+          break;
+        case 'Mega Coverage':
+          product.price = 80;
+
+          break;
+        case 'Special Full Coverage':
+          if (product.sellIn <= 0) {
+            product.price = 0;
+          } else if (product.sellIn < 5) {
+            product.price -= 3;
+          } else if (product.sellIn < 10) {
+            product.price -= 2;
           }
-        }
-      } else {
-        if (this.products[i].price < 50) {
-          this.products[i].price = this.products[i].price + 1;
-          if (this.products[i].name == 'Special Full Coverage') {
-            if (this.products[i].sellIn < 11) {
-              if (this.products[i].price < 50) {
-                this.products[i].price = this.products[i].price + 1;
-              }
-            }
-            if (this.products[i].sellIn < 6) {
-              if (this.products[i].price < 50) {
-                this.products[i].price = this.products[i].price + 1;
-              }
-            }
-          }
-        }
-      }
-      if (this.products[i].name != 'Mega Coverage') {
-        this.products[i].sellIn = this.products[i].sellIn - 1;
-      }
-      if (this.products[i].sellIn < 0) {
-        if (this.products[i].name != 'Full Coverage') {
-          if (this.products[i].name != 'Special Full Coverage') {
-            if (this.products[i].price > 0) {
-              if (this.products[i].name != 'Mega Coverage') {
-                this.products[i].price = this.products[i].price - 1;
-              }
-            }
+
+          break;
+        default:
+          if (product.sellIn < 0) {
+            product.price -= 2;
           } else {
-            this.products[i].price = this.products[i].price - this.products[i].price;
+            product -= 1;
           }
-        } else {
-          if (this.products[i].price < 50) {
-            this.products[i].price = this.products[i].price + 1;
-          }
-        }
       }
-    }
+    })
 
     return this.products;
   }
