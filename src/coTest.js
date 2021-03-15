@@ -7,6 +7,8 @@ class Product {
 }
 
 class CarInsurance {
+  defaultMaxPrice = 50;
+
   constructor(products = []) {
     this.products = products;
   }
@@ -45,6 +47,15 @@ class CarInsurance {
             product.price -= 1;
           }
       }
+
+      switch (product.name) {
+        case 'Mega Coverage':
+          break;
+        default:
+          product.price = Math.min(product.price, this.defaultMaxPrice);
+      }
+
+      product.price = Math.max(0, product.price);
     })
 
     return this.products;
