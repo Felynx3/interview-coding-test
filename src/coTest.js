@@ -34,6 +34,10 @@ class CarInsurance {
           }
 
           break;
+        case 'Super Sale':
+          product.price -= 2;
+
+          break;
         default:
           if (product.sellIn < 0) {
             product.price -= 2;
