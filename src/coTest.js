@@ -34,7 +34,11 @@ class CarInsurance {
 
       switch (product.name) {
         case 'Full Coverage':
-          product.price += 1;
+          if (product.sellIn < 0) {
+            product.price += 2;
+          } else {
+            product.price += 1;
+          }
 
           break;
         case 'Mega Coverage':

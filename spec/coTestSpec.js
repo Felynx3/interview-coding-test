@@ -76,7 +76,7 @@ describe('Co Test', function () {
     })
 
     describe('"Full Coverage" product', function () {
-      it('increases its price by 1', function () {
+      it('increases its price by 1 until sellIn date is reached', function () {
         const carInsurance = new CarInsurance([new Product('Full Coverage', 4, 0)]);
 
         while(carInsurance.products[0].sellIn > 0) {
@@ -89,6 +89,22 @@ describe('Co Test', function () {
           const deltaPrice = newPrice - prevPrice;
 
           expect(deltaPrice).to.equal(1);
+        }
+      })
+
+      it('increases its price by 2 since sellIn date is reached', function () {
+        const carInsurance = new CarInsurance([new Product('Full Coverage', 0, 0)]);
+
+        while(carInsurance.products[0].sellIn > -10) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(2);
         }
       })
     })
