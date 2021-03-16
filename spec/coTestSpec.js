@@ -104,4 +104,67 @@ describe('Co Test', function () {
         }
       })
     })
+
+    describe('"Special Full Coverage" product', function () {
+      it('decreases its price by 1 until the sellIn date reaches 10', function () {
+        const carInsurance = new CarInsurance([new Product('Special Full Coverage', 15, 10)]);
+
+        while(carInsurance.products[0].sellIn > 10) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(-1);
+        }
+      })
+
+      it('decreases its price by 2 when sellIn date is 10 or less', function () {
+        const carInsurance = new CarInsurance([new Product('Special Full Coverage', 10, 10)]);
+
+        while(carInsurance.products[0].sellIn > 5) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(-2);
+        }
+      })
+
+      it('decreases its price by 3 when sellIn date is 5 or less', function () {
+        const carInsurance = new CarInsurance([new Product('Special Full Coverage', 5, 30)]);
+
+        while(carInsurance.products[0].sellIn > 1) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+          console.log(prevPrice, newPrice);
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(-3);
+        }
+      })
+
+      it('sets its price to 0 when sellIn date is reached', function () {
+        const carInsurance = new CarInsurance([new Product('Special Full Coverage', 1, 30)]);
+
+        carInsurance.updatePrice();
+
+        const newPrice = carInsurance.products[0].price;
+
+        expect(newPrice).to.equal(0);
+      })
+    })
+
+  })
+
 });
