@@ -22,4 +22,49 @@ describe('Co Test', function () {
     expect(products).to.eql([...testProducts]);
   });
 
+  describe('Price update', function () {
+    describe('Common', function () {
+
+      it('sets the minimum product price as zero', function() {
+        const carInsurance = new CarInsurance([new Product('Test product', 3, -10)]);
+
+        expect(carInsurance.products[0].price).to.equal(0);
+      })
+
+      it('sets the maximum product price as 50', function() {
+        const carInsurance = new CarInsurance([new Product('Test product', 3, 100)]);
+
+        expect(carInsurance.products[0].price).to.equal(50);
+      })
+
+      it('decreases price by 1 until the sellIn date is reached', function () {
+        const carInsurance = new CarInsurance([new Product('Test product', 3, 10)]);
+
+        while(carInsurance.products[0].sellIn > 0) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(-1);
+        }
+      })
+
+      it('decreases price by 2 since the sellIn date is reached', function () {
+        const carInsurance = new CarInsurance([new Product('Test product', 0, 10)]);
+
+        const prevPrice = carInsurance.products[0].price;
+
+        carInsurance.updatePrice();
+
+        const newPrice = carInsurance.products[0].price;
+        const deltaPrice = newPrice - prevPrice;
+
+        expect(deltaPrice).to.equal(-2);
+      })
+
+      })
 });
