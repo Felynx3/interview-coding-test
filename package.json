@@ -2,7 +2,7 @@
   "name": "test-software-engineer",
   "version": "1.0.0",
   "description": "ComparaOnline Software Engineer Test",
-  "main": "index.js",
+  "main": "src/coTest.js",
   "scripts": {
     "test": "nyc mocha spec/*.js",
     "after-30-days": "node ./src/test30DaysReport.js"
