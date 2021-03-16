@@ -165,6 +165,24 @@ describe('Co Test', function () {
       })
     })
 
+    describe('"Super Sale" product', function () {
+      it('decreases its price by 2', function () {
+        const carInsurance = new CarInsurance([new Product('Super Sale', 5, 15)]);
+
+        while(carInsurance.products[0].sellIn > 0) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(-2);
+        }
+      })
+    })
+
   })
 
 });
