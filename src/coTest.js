@@ -22,7 +22,7 @@ class CarInsurance {
       case 'Mega Coverage':
         return 80;
       default:
-        return Math.min(product.price, this.defaultMaxPrice);
+        return Math.max(0, Math.min(product.price, this.defaultMaxPrice))
     }
   }
 
