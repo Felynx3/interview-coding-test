@@ -28,7 +28,9 @@ class CarInsurance {
 
   updatePrice() {
     this.products.forEach((product) => {
-      product.sellIn -= 1;
+      if (product.name !== 'Mega Coverage') {
+        product.sellIn -= 1;
+      }
 
       switch (product.name) {
         case 'Full Coverage':
