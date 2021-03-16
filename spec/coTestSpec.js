@@ -66,5 +66,13 @@ describe('Co Test', function () {
         expect(deltaPrice).to.equal(-2);
       })
 
+      it('does not decrease the price below zero', function () {
+        const carInsurance = new CarInsurance([new Product('Test product', 0, 0)]);
+
+        carInsurance.updatePrice();
+
+        expect(carInsurance.products[0].price).to.equal(0);
       })
+    })
+  })
 });
