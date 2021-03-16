@@ -74,5 +74,22 @@ describe('Co Test', function () {
         expect(carInsurance.products[0].price).to.equal(0);
       })
     })
-  })
+
+    describe('"Full Coverage" product', function () {
+      it('increases its price by 1', function () {
+        const carInsurance = new CarInsurance([new Product('Full Coverage', 4, 0)]);
+
+        while(carInsurance.products[0].sellIn > 0) {
+          const prevPrice = carInsurance.products[0].price;
+
+          carInsurance.updatePrice();
+
+          const newPrice = carInsurance.products[0].price;
+
+          const deltaPrice = newPrice - prevPrice;
+
+          expect(deltaPrice).to.equal(1);
+        }
+      })
+    })
 });
