@@ -147,7 +147,7 @@ describe('Co Test', function () {
           carInsurance.updatePrice();
 
           const newPrice = carInsurance.products[0].price;
-          console.log(prevPrice, newPrice);
+
           const deltaPrice = newPrice - prevPrice;
 
           expect(deltaPrice).to.equal(-3);
