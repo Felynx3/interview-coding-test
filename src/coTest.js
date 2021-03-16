@@ -7,10 +7,14 @@ class Product {
 }
 
 class CarInsurance {
+
   defaultMaxPrice = 50;
 
   constructor(products = []) {
-    this.products = products;
+    this.products = products.map((product) => ({
+      ...product,
+      price: Math.min(50, Math.max(0, product.price)),
+    }));
   }
 
   updatePrice() {
