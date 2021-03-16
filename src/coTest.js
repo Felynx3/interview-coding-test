@@ -13,8 +13,17 @@ class CarInsurance {
   constructor(products = []) {
     this.products = products.map((product) => ({
       ...product,
-      price: Math.min(50, Math.max(0, product.price)),
+      price: this.getInitialPrice(product),
     }));
+  }
+
+  getInitialPrice(product) {
+    switch (product.name) {
+      case 'Mega Coverage':
+        return 80;
+      default:
+        return Math.min(product.price, this.defaultMaxPrice);
+    }
   }
 
   updatePrice() {
