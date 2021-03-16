@@ -5,7 +5,7 @@
   "main": "src/coTest.js",
   "scripts": {
     "test": "nyc mocha spec/*.js",
-    "after-30-days": "node ./src/test30DaysReport.js"
+    "after-30-days": "node src/30DaysReport.js"
   },
   "repository": {
     "type": "git",
