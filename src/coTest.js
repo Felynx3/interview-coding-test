@@ -11,19 +11,24 @@ class CarInsurance {
   defaultMaxPrice = 50;
 
   constructor(products = []) {
-    this.products = products.map((product) => ({
-      ...product,
-      price: this.getInitialPrice(product),
-    }));
+    this.products = products.map(this.initializePrice.bind(this));
   }
 
-  getInitialPrice(product) {
+  initializePrice(originalProduct) {
+    const product = { ...originalProduct };
+
     switch (product.name) {
       case 'Mega Coverage':
-        return 80;
+        product.price = 80;
+
+        break;
       default:
-        return Math.max(0, Math.min(product.price, this.defaultMaxPrice))
+        product.price = Math.max(0, Math.min(product.price, this.defaultMaxPrice))
+
+        break;
     }
+
+    return product;
   }
 
   updatePrice() {
