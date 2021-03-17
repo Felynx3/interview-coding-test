@@ -1,6 +1,6 @@
 {
   "name": "test-software-engineer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ComparaOnline Software Engineer Test",
   "main": "src/coTest.js",
   "scripts": {
